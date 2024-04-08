@@ -1,0 +1,77 @@
+select count(*)
+from categories ctg
+inner join products pr on ctg.id = pr.category_id
+inner join suppliers sup on pr.supplier_id = sup.id
+inner join order_details od on pr.id = od.product_id
+inner join orders o on od.order_id = o.id
+inner join employees e on o.employee_id = e.employee_id
+inner join shippers sh on o.shipper_id = sh.id
+inner join customers cst on o.customer_id = cst.id;
+
+select count(*)
+from categories ctg
+right join products pr on ctg.id = pr.category_id
+inner join suppliers sup on pr.supplier_id = sup.id
+inner join order_details od on pr.id = od.product_id
+left join orders o on od.order_id = o.id
+inner join employees e on o.employee_id = e.employee_id
+left join shippers sh on o.shipper_id = sh.id
+inner join customers cst on o.customer_id = cst.id;
+
+select *
+from categories ctg
+inner join products pr on ctg.id = pr.category_id
+inner join suppliers sup on pr.supplier_id = sup.id
+inner join order_details od on pr.id = od.product_id
+inner join orders o on od.order_id = o.id
+inner join employees e on o.employee_id = e.employee_id
+inner join shippers sh on o.shipper_id = sh.id
+inner join customers cst on o.customer_id = cst.id
+where e.employee_id between 3 and 10;
+
+select count(*) as in_row, avg(od.quantity), ctg.name
+from categories ctg
+inner join products pr on ctg.id = pr.category_id
+inner join suppliers sup on pr.supplier_id = sup.id
+inner join order_details od on pr.id = od.product_id
+inner join orders o on od.order_id = o.id
+inner join employees e on o.employee_id = e.employee_id
+inner join shippers sh on o.shipper_id = sh.id
+inner join customers cst on o.customer_id = cst.id
+group by ctg.name;
+
+select count(*) as in_row, avg(od.quantity), ctg.name
+from categories ctg
+inner join products pr on ctg.id = pr.category_id
+inner join suppliers sup on pr.supplier_id = sup.id
+inner join order_details od on pr.id = od.product_id
+inner join orders o on od.order_id = o.id
+inner join employees e on o.employee_id = e.employee_id
+inner join shippers sh on o.shipper_id = sh.id
+inner join customers cst on o.customer_id = cst.id
+group by ctg.name
+having avg(od.quantity) > 21;
+
+select count(*) as in_row, avg(od.quantity), ctg.name
+from categories ctg
+inner join products pr on ctg.id = pr.category_id
+inner join suppliers sup on pr.supplier_id = sup.id
+inner join order_details od on pr.id = od.product_id
+inner join orders o on od.order_id = o.id
+inner join employees e on o.employee_id = e.employee_id
+inner join shippers sh on o.shipper_id = sh.id
+inner join customers cst on o.customer_id = cst.id
+group by ctg.name
+order by avg(od.quantity) desc;
+
+select *
+from categories ctg
+inner join products pr on ctg.id = pr.category_id
+inner join suppliers sup on pr.supplier_id = sup.id
+inner join order_details od on pr.id = od.product_id
+inner join orders o on od.order_id = o.id
+inner join employees e on o.employee_id = e.employee_id
+inner join shippers sh on o.shipper_id = sh.id
+inner join customers cst on o.customer_id = cst.id
+limit 4
+offset 1;
