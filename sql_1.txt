@@ -1,0 +1,50 @@
+create table if not exists authors (
+author_id int auto_increment primary key,
+author_name varchar(255)
+);
+
+create table if not exists genres (
+genre_id int auto_increment primary key,
+genre_name varchar(255)
+);
+
+create table if not exists books (
+book_id int auto_increment primary key,
+title varchar(255),
+publication_year year,
+author_id int,
+genre_id int,
+foreign key (author_id) references authors(author_id),
+foreign key (genre_id) references genres(genre_id)
+);
+
+create table if not exists users (
+user_id int auto_increment primary key,
+title varchar(255),
+email varchar(255)
+);
+
+create table if not exists borrowed_books (
+borrow_id int auto_increment primary key,
+book_id int,
+user_id int,
+borrow_date date,
+return_date date,
+foreign key (book_id) references books(book_id),
+foreign key (user_id) references users(user_id)
+);
+
+insert into authors (author_name)
+values ('Valerii'), ('Vadym');
+
+insert into genres (genre_name)
+values ('Adventure'), ('Roman');
+
+insert into books (title, publication_year, author_id, genre_id)
+values ('Mark Twen', 1999, 1, 1), ('Hobbits', 1950, 2, 2);
+
+insert into users (title, email)
+values ('valerii', 'valerii@gmail.com'), ('vadem', 'vadem@gmail.com');
+
+INSERT INTO borrowed_books (book_id, user_id, borrow_date, return_date)
+VALUES (1, 1, '2000-12-21', '2024-12-12'), (2, 2, '1999-12-12', '2000-01-01');
